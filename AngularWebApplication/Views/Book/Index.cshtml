@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Books";
+}
+
+<!DOCTYPE html>
+<html ng-app="booksApp">
+<head>
+    <title>@ViewData["Title"]</title>
+
+    <script src="~/lib/angular/angular.js"></script>
+
+    <script src="~/js/Module.js"></script>
+    <script src="~/js/Service.js"></script>
+    <script src="~/js/Controller.js"></script>
+    <script src="~/lib/ng-file-upload/ng-file-upload.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+
+<body ng-controller="BookListController">
+    <div class="body-content">
+      
+        <div class="form-group" ng-if="!isReadOnly && targetTable.columns.length!=0">
+            <label class="control-label pull-left">Select File to upload</label>
+            <div class="col-sm-2 pull-left">
+                <input id="file" type="file" ngf-select ng-model="fileData" name="file" accept=".csv, .xlsx, .xls" required style="display:none;" />
+
+                <span class="btn btn-xs grey-cascade margin-bottom-10 span-valign-baseline">
+                    <label for="file">Browse</label>
+                </span>
+                <button type="button" class="btn btn-default no-border" ng-click="uploadFile(fileData)">
+                    <span class="glyphicon glyphicon-upload file-upload-btn" aria-hidden="true"></span>
+                    Upload
+                </button>
+            </div>
+        </div>
+        <span class="bold" ng-if="selectedFile!=undefined">Selected File: </span> {{selectedFile}}
+        <div class="text-error margin-top-15" ng-if="fileUploadError">{{fileUploadMessage}}</div>     
+
+    </div>
+</body>
+</html>
